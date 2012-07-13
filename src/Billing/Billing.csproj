@@ -54,7 +54,7 @@
     <Reference Include="NServiceBus.Host">
       <HintPath>..\packages\NServiceBus.Host.3.2.5\lib\net40\NServiceBus.Host.exe</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.ObjectBuilder.Ninject">
+    <Reference Include="NServiceBus.ObjectBuilder.Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.Ninject.3.2.5\lib\net40\NServiceBus.ObjectBuilder.Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -63,11 +63,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointConfig.cs" />
+    <Compile Include="OrderSubmittedSaga.cs" />
+    <Compile Include="OrderSubmittedSagaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Billing.Events\Billing.Events.csproj">
+      <Project>{CFBF545E-23E6-4387-82A2-298A14F64AA4}</Project>
+      <Name>Billing.Events</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ITOps.PaymentProviderIntegration\ITOps.PaymentProviderIntegration.csproj">
+      <Project>{CCABEE52-220C-48C3-A3FF-C9E103BCC5E4}</Project>
+      <Name>ITOps.PaymentProviderIntegration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sales.Events\Sales.Events.csproj">
+      <Project>{36E06593-75C4-4FC9-ADD8-CADE18A28620}</Project>
+      <Name>Sales.Events</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

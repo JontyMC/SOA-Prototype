@@ -5,14 +5,14 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1E371DE1-1C4E-4817-999E-BE06E8E54B01}</ProjectGuid>
+    <ProjectGuid>{50337113-A347-4104-B305-C8CD9158CE70}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sales</RootNamespace>
-    <AssemblyName>Sales</AssemblyName>
+    <RootNamespace>TestClient</RootNamespace>
+    <AssemblyName>TestClient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\src\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
@@ -45,13 +45,14 @@
     <Reference Include="Ninject.Extensions.NamedScope">
       <HintPath>..\packages\Ninject.Extensions.NamedScope.3.0.0.5\lib\net40\Ninject.Extensions.NamedScope.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus">
+    <Reference Include="NServiceBus, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.3.2.5\lib\net40\NServiceBus.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Core">
+    <Reference Include="NServiceBus.Core, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
       <HintPath>..\packages\NServiceBus.3.2.5\lib\net40\NServiceBus.Core.dll</HintPath>
     </Reference>
-    <Reference Include="NServiceBus.Host">
+    <Reference Include="NServiceBus.Host, Version=3.2.0.0, Culture=neutral, PublicKeyToken=9fc386479f8a226c, processorArchitecture=MSIL">
+      <ExecutableExtension>.exe</ExecutableExtension>
       <HintPath>..\packages\NServiceBus.Host.3.2.5\lib\net40\NServiceBus.Host.exe</HintPath>
     </Reference>
     <Reference Include="NServiceBus.ObjectBuilder.Ninject">
@@ -63,27 +64,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointConfig.cs" />
-    <Compile Include="OrderSaga.cs" />
-    <Compile Include="OrderSagaData.cs" />
-    <Compile Include="OrderStatus.cs" />
+    <Compile Include="ServerEndpoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Inventory.Events\Inventory.Events.csproj">
-      <Project>{7DF4873F-AEE8-487E-9E5C-4D1B06668609}</Project>
-      <Name>Inventory.Events</Name>
+    <ProjectReference Include="..\Billing.Commands\Billing.Commands.csproj">
+      <Project>{5C65E0D3-22ED-4093-8088-6B261EDC5A46}</Project>
+      <Name>Billing.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CustomerCare.Commands\CustomerCare.Commands.csproj">
+      <Project>{3C00AEFD-9CFD-4D05-957E-3C05026E09FC}</Project>
+      <Name>CustomerCare.Commands</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Inventory.Commands\Inventory.Commands.csproj">
+      <Project>{4677AB32-474D-45E1-BAE9-9938AEE629AC}</Project>
+      <Name>Inventory.Commands</Name>
     </ProjectReference>
     <ProjectReference Include="..\Sales.Commands\Sales.Commands.csproj">
       <Project>{0CAC18CF-2210-4DDF-85F1-FC7E2CC6FBCB}</Project>
       <Name>Sales.Commands</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Sales.Events\Sales.Events.csproj">
-      <Project>{36E06593-75C4-4FC9-ADD8-CADE18A28620}</Project>
-      <Name>Sales.Events</Name>
+    <ProjectReference Include="..\Shipping.Commands\Shipping.Commands.csproj">
+      <Project>{89F92FC0-9D4C-4B98-B9B0-A3EE3BDDA026}</Project>
+      <Name>Shipping.Commands</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -95,8 +104,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <StartAction>Program</StartAction>
-    <StartProgram>$(ProjectDir)$(OutputPath)NServiceBus.Host.exe</StartProgram>
-  </PropertyGroup>
 </Project>
